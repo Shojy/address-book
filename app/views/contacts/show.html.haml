@@ -1,0 +1,13 @@
+= image_tag @contact.gravatar_url
+= "#{@contact.first_name} #{@contact.last_name}"
+
+%p
+  %strong Primary Email:
+  = @contact.email
+
+-@contact.details.each do |detail|
+  %p
+    %strong= detail.label
+    = detail.value
+
+= link_to 'Edit', edit_contact_path

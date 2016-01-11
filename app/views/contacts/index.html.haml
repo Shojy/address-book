@@ -1,0 +1,6 @@
+- @contacts.each do |contact|
+  .contact
+    = link_to contact do
+      = image_tag contact.gravatar_url
+      = "#{contact.first_name} #{contact.last_name}"
+    %br

@@ -7,4 +7,31 @@
     = csrf_meta_tags
 
   %body
-    = yield
+    %nav.navbar.navbar-full.navbar-light.bg-faded
+      .container
+        = link_to 'Address Book', root_path, class: 'navbar-brand'
+
+        %ul.nav.navbar-nav
+          %li.nav-item= link_to 'My Address Book', contacts_path, class: 'nav-link'
+          %li.nav-item= link_to 'New Contact', new_contact_path, class: 'nav-link'
+        
+        %ul.nav.navbar-nav.pull-xs-right
+          %li.nav-item
+            %span.nav-link= 'Logged in as Shojy'
+          %li.nav-item= link_to 'Log out', root_path, class: 'nav-link'
+
+    .container
+      - flash.each do |name, msg|
+        - if name == 'notice'
+          - state = 'alert-success'
+        - elsif name == 'alert'
+          - state = 'alert-danger'
+        - else
+          - state = 'alert-' + name
+        
+        .alert.alert-dismissable.fade.in{role: "alert", class: state}
+          %button.close{'data-dismiss': "alert", 'aria-label': "Close" }
+            %span{'aria-hidden': "true"} &times;
+          = msg
+
+      = yield
